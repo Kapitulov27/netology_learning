@@ -1,4 +1,4 @@
-FROM python:3.9-slim as builder
+FROM python:3.12-bullseye as builder
 WORKDIR /app
 
 #Установка компилятора gcc
@@ -17,7 +17,7 @@ RUN --mount=type=cache,target=~/.cache/pip pip install -r requirements.txt
 
 
 
-FROM python:3.9-alpine as worker
+FROM python:3.12-slim as worker
 WORKDIR /app
 
 
