@@ -1,4 +1,4 @@
-FROM python:3.9-slim
+FROM python:3.12-slim
 
 # Копируем ОДНО И ТО ЖЕ приложение (как в 6.exec.Dockerfile)
 COPY app.py /app.py
