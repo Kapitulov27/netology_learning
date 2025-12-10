@@ -1,5 +1,7 @@
-bad build order
+Демонстрация неправильного порядка слоёв в Dockerfile: изменение кода заново инвалидирует установку зависимостей и удлиняет сборку.
 
-docker build -t python_bad_order . #--no-cache
-docker run -d -p 5000:5000 --name python_bad_order python_bad_order && docker ps
-curl http://127.0.0.1:5000 && docker rm -f python_bad_order
+Сборка и запуск
+- Собрать образ (при необходимости сбросить кэш добавь `--no-cache`): `docker build -t python_bad_order .`
+- Запустить контейнер: `docker run -d -p 5000:5000 --name python_bad_order python_bad_order && docker ps`
+- Проверить ответ: `curl http://127.0.0.1:5000`
+- Остановить и удалить контейнер: `docker rm -f python_bad_order`
