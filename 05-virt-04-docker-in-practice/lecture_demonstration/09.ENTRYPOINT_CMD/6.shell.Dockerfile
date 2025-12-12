@@ -1,5 +1,7 @@
 FROM python:3.12-slim
 
+RUN apt update && apt install -y psmisc procps
+
 # Копируем ОДНО И ТО ЖЕ приложение (как в 6.exec.Dockerfile)
 COPY app.py /app.py
 
