@@ -103,7 +103,7 @@ https://github.com/Kapitulov27/shvirtd-example-python
 ![Вывод скриншота консоли](task05-06(dive).png) 
 
 Слой:d7ce41a85ad466f7c820e6abb07f005d4903828399fab2ccd4a8aff3d7e6a0f2                                                                                         
-
+###
 ![Вывод скриншота консоли-2](task05-06.png)                
 
 ## Задача 6.1
