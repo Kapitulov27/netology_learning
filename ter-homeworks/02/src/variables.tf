@@ -16,6 +16,7 @@ variable "default_zone" {
   default     = "ru-central1-a"
   description = "https://cloud.yandex.ru/docs/overview/concepts/geo-scope"
 }
+
 variable "default_cidr" {
   type        = list(string)
   default     = ["10.0.1.0/24"]
@@ -28,11 +29,30 @@ variable "vpc_name" {
   description = "VPC network & subnet name"
 }
 
-
-###ssh vars
-
-variable "vms_ssh_root_key" {
+variable "vms_ssh_public_root_key" {
   type        = string
-  default     = "<your_ssh_ed25519_key>"
-  description = "ssh-keygen -t ed25519"
+  description = "Публичный SSH-ключ для доступа к ВМ"
+}
+
+
+#task6
+variable "vms_resources" {
+  type = map(object({
+    cores         = number
+    memory        = number
+    core_fraction = number
+    hdd_size      = number
+    hdd_type      = string
+    platform_id   = string
+    zone          = string
+    preemptible   = bool
+    nat           = bool
+    serial_port   = number
+  }))
+  description = "Параметры ресурсов для VM"
+}
+
+variable "metadata" {
+  type        = map(string)
+  description = "Общие метаданные"
 }
