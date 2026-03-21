@@ -1,8 +1,14 @@
-  deb2:
-    hosts:
-      ubuntu2:
-        ansible_connection: docker
-  deb:
-    hosts:
-      ubuntu:
-        ansible_connection: docker
+all:
+  children:
+    local:
+      hosts:
+        localhost:
+          ansible_connection: local
+    deb2:
+      hosts:
+        ubuntu2:
+         ansible_connection: docker
+    deb:
+     hosts:
+        ubuntu:
+          ansible_connection: docker
