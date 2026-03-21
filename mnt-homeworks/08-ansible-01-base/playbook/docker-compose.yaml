@@ -1,0 +1,7 @@
+services:
+  deb:
+    image: geerlingguy/docker-debian10-ansible:latest
+    container_name: ubuntu
+  deb2:
+    image: geerlingguy/docker-debian10-ansible:latest
+    container_name: ubuntu2 

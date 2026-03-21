@@ -1,0 +1,8 @@
+  deb2:
+    hosts:
+      ubuntu2:
+        ansible_connection: docker
+  deb:
+    hosts:
+      ubuntu:
+        ansible_connection: docker
