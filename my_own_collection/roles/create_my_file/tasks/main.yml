@@ -1,0 +1,6 @@
+---
+- name: Создать файл через мой модуль
+  netology.cloud_ansible.my_own_file:
+    path: "{{ file_path }}"
+    content: "{{ file_content }}"
+    state: "{{ file_state }}"
