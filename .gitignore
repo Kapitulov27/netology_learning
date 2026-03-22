@@ -22,3 +22,24 @@ rad.json
 TestResults.xml
 *.hcl
 *.json
+ansible/
+.ansible/
+# Ansible локальное окружение
+ansible/venv/
+ansible/__pycache__/
+ansible/*.egg-info/
+ansible/.pytest_cache/
+ansible/.coverage*
+ansible/.tox/
+ansible/tests/unit/__file__.pyc*
+ansible/test/lib/ansible-test/
+
+# Общие Python исключения
+*.py[cod]
+*$py.class
+*.so
+.DS_Store
+
+# Git
+.git/*
+!.gitignore
