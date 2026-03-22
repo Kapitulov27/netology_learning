@@ -1,0 +1,13 @@
+namespace: netology
+name: cloud_ansible
+version: 1.0.0
+readme: README.md
+authors:
+  - Your Name <your_email@example.com>
+description: Collection with custom file management tools
+license:
+  - GPL-3.0-or-later
+tags:
+  - file
+  - sysadmin
+dependencies: {}
