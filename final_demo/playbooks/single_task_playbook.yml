@@ -1,0 +1,9 @@
+---
+- hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: Создать файл через мой модуль
+      command: echo '{"ANSIBLE_MODULE_ARGS": {"path": "/tmp/playbook_test.txt", "content": "Playbook test", "state": "present"}}' | python3 /home/omp/Desktop/netology_learning/my_own_collection/plugins/modules/my_own_file.py
+      register: result
+      
+    - debug: var=result.stdout_lines
