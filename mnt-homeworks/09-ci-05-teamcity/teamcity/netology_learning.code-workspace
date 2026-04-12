@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"name": "netology_learning",
+			"path": "../../.."
+		},
+		{
+			"name": "shvirtd-example-python",
+			"path": "../../../../shvirtd-example-python"
+		}
+	],
+	"settings": {}
+}
