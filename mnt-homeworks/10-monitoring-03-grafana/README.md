@@ -39,26 +39,27 @@
 
 Создайте Dashboard и в ней создайте Panels:
 
-## - утилизация CPU для nodeexporter (в процентах, 100-idle);
+# - утилизация CPU для nodeexporter (в процентах, 100-idle);
 
-Ответ:
-100 - (avg by ("$instance") (rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100)
+## Ответ:
+### 100 - (avg by ("$instance") (rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100)
 
-## - CPULA 1/5/15;
+# - CPULA 1/5/15;
 
-Ответ:
-node_load1{instance=~"$instance"}
-node_load5{instance=~"$instance"}
-node_load15{instance=~"$instance"}
+## Ответ:
+### node_load1{instance=~"$instance"}
+### node_load5{instance=~"$instance"}
+### node_load15{instance=~"$instance"}
 
-## - количество свободной оперативной памяти;
-Ответ:
-node_memory_MemAvailable_bytes{instance=~"$instance"}
+# - количество свободной оперативной памяти;
+## Ответ:
+### node_memory_MemAvailable_bytes{instance=~"$instance"}
 
-## - количество места на файловой системе.
-Ответ:
-node_filesystem_avail_bytes{instance=~"$instance", fstype!~"tmpfs|overlay|squashfs", mountpoint="/"}
-## Для решения этого задания приведите promql-запросы для выдачи этих метрик, а также скриншот получившейся Dashboard.
+# - количество места на файловой системе.
+## Ответ:
+### node_filesystem_avail_bytes{instance=~"$instance", fstype!~"tmpfs|overlay|squashfs", mountpoint="/"}
+
+ Для решения этого задания приведите promql-запросы для выдачи этих метрик, а также скриншот получившейся Dashboard.
 ![Grafana](task02.png)
 
 ## Задание 3
