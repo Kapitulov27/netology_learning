@@ -51,6 +51,8 @@ jobs:
     - name: Deploy to Kubernetes
       if: github.ref_type == 'tag'
       run: |
+        sed -i 's|image: nginx:1.25-alpine|image: ${{ secrets.DOCKERHUB_USERNAME }}/diplom-app:${{ github.ref_name }}|g' ./diplom/k8s-app.yaml
+        
         kubectl apply -f ./diplom/k8s-app.yaml
-        kubectl set image deployment/diplom-app nginx=${{ secrets.DOCKERHUB_USERNAME }}/diplom-app:${{ github.ref_name }}
+        
         kubectl rollout status deployment/diplom-app --timeout=120s
