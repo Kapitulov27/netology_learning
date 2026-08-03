@@ -3,7 +3,7 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - main 
+      - main
 
 jobs:
   build-and-deploy:
@@ -22,8 +22,8 @@ jobs:
     - name: Build and push Docker image
       uses: docker/build-push-action@v5
       with:
-        context: ./app
-        file: ./app/Dockerfile
+        context: ./diplom/app
+        file: ./diplom/app/Dockerfile
         push: true
         tags: ${{ secrets.DOCKERHUB_USERNAME }}/diplom-app:latest
 
@@ -35,6 +35,6 @@ jobs:
 
     - name: Deploy to Kubernetes
       run: |
-        kubectl apply -f diplom/k8s-app.yaml
+        kubectl apply -f ./diplom/k8s-app.yaml
         kubectl rollout restart deployment/diplom-app
         kubectl rollout status deployment/diplom-app --timeout=60s
