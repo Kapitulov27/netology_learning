@@ -3,7 +3,9 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - main 
+      - main
+    tags:
+      - 'v*' 
 
 jobs:
   build-and-deploy:
@@ -19,22 +21,37 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-    - name: Build and push Docker image
+    - name: Build and push latest image
+      if: github.ref_type != 'tag'
       uses: docker/build-push-action@v5
       with:
-        context: ./app
-        file: ./app/Dockerfile
+        context: ./diplom/app
+        file: ./diplom/app/Dockerfile
         push: true
         tags: ${{ secrets.DOCKERHUB_USERNAME }}/diplom-app:latest
 
+    - name: Build and push versioned image
+      if: github.ref_type == 'tag'
+      uses: docker/build-push-action@v5
+      with:
+        context: ./diplom/app
+        file: ./diplom/app/Dockerfile
+        push: true
+        tags: |
+          ${{ secrets.DOCKERHUB_USERNAME }}/diplom-app:${{ github.ref_name }}
+          ${{ secrets.DOCKERHUB_USERNAME }}/diplom-app:latest
+
     - name: Set up Kubeconfig
+      if: github.ref_type == 'tag' 
       run: |
         mkdir -p ~/.kube
-        echo "${{ secrets.KUBECONFIG_DATA }}" > ~/.kube/config
+        echo "${{ secrets.KUBECONFIG_DATA }}" | base64 --decode > ~/.kube/config
         chmod 600 ~/.kube/config
 
     - name: Deploy to Kubernetes
+      if: github.ref_type == 'tag'
       run: |
-        kubectl apply -f k8s-app.yaml
+        sed -i 's|image: nginx:1.25-alpine|image: ${{ secrets.DOCKERHUB_USERNAME }}/diplom-app:${{ github.ref_name }}|g' ./diplom/k8s-app.yaml
+        kubectl apply -f ./diplom/k8s-app.yaml
         kubectl rollout restart deployment/diplom-app
         kubectl rollout status deployment/diplom-app --timeout=60s
